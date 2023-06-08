@@ -1,0 +1,761 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Customer Analysis of Cyclistic:},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Customer Analysis of Cyclistic:}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{A Bike-Sharing Company}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{project-overview}{%
+\subsubsection{PROJECT OVERVIEW}\label{project-overview}}
+
+This is the analysis performed on Cyclistic's bike sharing data. The
+purpose of this analysis is for Cyclistic to provide casual and annual
+members with the best cost saving solution. Cyclistic believe that some
+casual members can benefit from becoming annual members.
+
+\hypertarget{objectives}{%
+\subsubsection{OBJECTIVES:}\label{objectives}}
+
+\begin{itemize}
+\tightlist
+\item
+  Encourage casual riders to become annual members
+\item
+  Increase the number of new annual members
+\end{itemize}
+
+\hypertarget{deliverables}{%
+\subsubsection{DELIVERABLES:}\label{deliverables}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Description of Data Source used
+\item
+  Documentation of all cleaning or manipulation of data
+\item
+  A summary of analysis
+\item
+  Supporting visualization and key findings
+\item
+  Top three (3) recommendations based on findings
+\end{enumerate}
+
+\hypertarget{method}{%
+\subsubsection{METHOD}\label{method}}
+
+Utilizing the data processing method of ask, prepare, process, analyze,
+share, and act to complete the objective and provide a solution for the
+client.
+
+\hypertarget{ask}{%
+\paragraph{ASK}\label{ask}}
+
+For the first step in the data analysis process, we have to start by
+asking the right questions.
+
+\begin{itemize}
+\tightlist
+\item
+  How do the annual members and casual riders use Cyclistic differently?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    How often do casual members use the service versus annual members
+  \item
+    What data do we need to consider and what are extra
+  \item
+    What is the average time used for each user type
+  \item
+    What is the max time used for each user and bike type
+  \item
+    What is the standard deviation of the time used for each user and
+    bike type
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{prepare}{%
+\paragraph{PREPARE}\label{prepare}}
+
+For this process, the data will need to be downloaded and review on what
+information is given. From here, we can determine what processing steps
+to take based on the data provided.
+
+\begin{itemize}
+\tightlist
+\item
+  What information can be used?
+\item
+  Are there any inconsistencies or missing values?
+\item
+  What information need to be extrapolated?
+\item
+  Install and load the correct packages
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{suppressPackageStartupMessages}\NormalTok{(\{}
+\NormalTok{pacman}\SpecialCharTok{::}\FunctionTok{p\_load}\NormalTok{(ggplot2, tidyr, dplyr, tidyverse, lessR, janitor, here, dslabs)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{process}{%
+\paragraph{PROCESS}\label{process}}
+
+The process of cleaning and organizing the data will be detailed in this
+notebook. The codes and results will be shown as each point is
+addressed.
+
+\hypertarget{analyze}{%
+\paragraph{ANALYZE}\label{analyze}}
+
+The analyze will be detailed in this notebook. As the questions in the
+ask section, the detailed analysis will answer each and will reach a
+conclusion. At the end of the analysis, the data will reveal what
+differentiate annual members from the casual riders.
+
+\hypertarget{share}{%
+\paragraph{SHARE}\label{share}}
+
+In conculusion, visualation will be presented to the stakeholders in
+this notebook. A minimum of three (3) solutions wil be provided to the
+stakeholders to select and act
+
+\hypertarget{process-and-analyze}{%
+\subsubsection{PROCESS AND ANALYZE}\label{process-and-analyze}}
+
+\hypertarget{loading-the-dataset}{%
+\paragraph{Loading the dataset}\label{loading-the-dataset}}
+
+R Studio will be used and we will call this dataset ``cyclistic''. After
+loading the dataset we want to view the data and explore the structure.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readr)}
+\NormalTok{cyclistic }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Desktop/Case Study 1/202303{-}cyclistic.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 258678 Columns: 13
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# This will show the structure of the dataset}
+\FunctionTok{str}\NormalTok{(cyclistic)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## spc_tbl_ [258,678 x 13] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ ride_id           : chr [1:258678] "6842AA605EE9FBB3" "F984267A75B99A8C" "FF7CF57CFE026D02" "6B61B916032CB6D6" ...
+##  $ rideable_type     : chr [1:258678] "electric_bike" "electric_bike" "classic_bike" "classic_bike" ...
+##  $ started_at        : POSIXct[1:258678], format: "2023-03-16 08:20:34" "2023-03-04 14:07:06" ...
+##  $ ended_at          : POSIXct[1:258678], format: "2023-03-16 08:22:52" "2023-03-04 14:15:31" ...
+##  $ start_station_name: chr [1:258678] "Clark St & Armitage Ave" "Public Rack - Kedzie Ave & Argyle St" "Orleans St & Chestnut St (NEXT Apts)" "Desplaines St & Kinzie St" ...
+##  $ start_station_id  : chr [1:258678] "13146" "491" "620" "TA1306000003" ...
+##  $ end_station_name  : chr [1:258678] "Larrabee St & Webster Ave" NA "Clark St & Randolph St" "Sheffield Ave & Kingsbury St" ...
+##  $ end_station_id    : chr [1:258678] "13193" NA "TA1305000030" "13154" ...
+##  $ start_lat         : num [1:258678] 41.9 42 41.9 41.9 41.9 ...
+##  $ start_lng         : num [1:258678] -87.6 -87.7 -87.6 -87.6 -87.7 ...
+##  $ end_lat           : num [1:258678] 41.9 42 41.9 41.9 41.9 ...
+##  $ end_lng           : num [1:258678] -87.6 -87.7 -87.6 -87.7 -87.7 ...
+##  $ member_casual     : chr [1:258678] "member" "member" "member" "member" ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   ride_id = col_character(),
+##   ..   rideable_type = col_character(),
+##   ..   started_at = col_datetime(format = ""),
+##   ..   ended_at = col_datetime(format = ""),
+##   ..   start_station_name = col_character(),
+##   ..   start_station_id = col_character(),
+##   ..   end_station_name = col_character(),
+##   ..   end_station_id = col_character(),
+##   ..   start_lat = col_double(),
+##   ..   start_lng = col_double(),
+##   ..   end_lat = col_double(),
+##   ..   end_lng = col_double(),
+##   ..   member_casual = col_character()
+##   .. )
+##  - attr(*, "problems")=<externalptr>
+\end{verbatim}
+
+Noting the results from the dataset. There are 13 columns and 3
+identifier columns. The identify columns are the ride\_id,
+rideable\_type, and member\_casual.
+
+\begin{itemize}
+\tightlist
+\item
+  ride\_id is the individual rental transaction.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Initially, there was a question of whether this is the individual
+    bike ID or rider id. It was determined that this was the transaction
+    ID since there are no distinct values (see ``null check'').
+  \end{itemize}
+\item
+  rideable\_type is the type of bike it is
+\item
+  member\_casual is the whether or not the rider is a member or casual
+  rider
+\end{itemize}
+
+\hypertarget{reviewing-the-data}{%
+\paragraph{Reviewing the data}\label{reviewing-the-data}}
+
+From the dataset, we need to determine if there are any missing values,
+how many distinct values, and what they are. The code below will show a
+count of which columns have NULL values and how many.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{null\_check }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(cyclistic))}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(cyclistic))\{}
+\NormalTok{    null\_check[i] }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(cyclistic[,i]))\}}
+\NormalTok{null\_check }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(cyclistic), null\_check)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Execute to display the number NULL values for each attribute}
+\NormalTok{null\_check}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    colnames.cyclistic. null_check
+## 1              ride_id          0
+## 2        rideable_type          0
+## 3           started_at          0
+## 4             ended_at          0
+## 5   start_station_name      35910
+## 6     start_station_id      35910
+## 7     end_station_name      38438
+## 8       end_station_id      38438
+## 9            start_lat          0
+## 10           start_lng          0
+## 11             end_lat        183
+## 12             end_lng        183
+## 13       member_casual          0
+\end{verbatim}
+
+Next, the code below will determine what the distinct values are and how
+many of each.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{num\_distinct }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(cyclistic))}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(cyclistic) )\{}
+\NormalTok{    num\_distinct[i] }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{count}\NormalTok{(}\FunctionTok{distinct}\NormalTok{(cyclistic[i])))\}}
+\NormalTok{num\_distinct }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(cyclistic), num\_distinct)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Run this to display the number of distinct values for each attribute}
+\NormalTok{num\_distinct}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    colnames.cyclistic. num_distinct
+## 1              ride_id       258678
+## 2        rideable_type            3
+## 3           started_at       238046
+## 4             ended_at       238406
+## 5   start_station_name          989
+## 6     start_station_id          970
+## 7     end_station_name         1003
+## 8       end_station_id          980
+## 9            start_lat        97749
+## 10           start_lng        97276
+## 11             end_lat          906
+## 12             end_lng          894
+## 13       member_casual            2
+\end{verbatim}
+
+\hypertarget{organize-the-dataset}{%
+\paragraph{Organize the dataset}\label{organize-the-dataset}}
+
+After the initial review of the dataset, the primary focus was
+determined to be ride\_id, rideable\_type, started\_at, ended\_at, and
+member\_casual. Additional information was need and will utilize the
+existing attributes to extrapolate the time rented by each rider type
+and bike type.
+
+To extrapolate the time rented, we need to take the date and time
+difference from ended\_at and started\_at.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cyclistic }\OtherTok{\textless{}{-}}\NormalTok{ cyclistic }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{time\_used=}\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{difftime}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{ended\_at, cyclistic}\SpecialCharTok{$}\NormalTok{started\_at, }\AttributeTok{units =} \StringTok{"secs"}\NormalTok{)))}
+
+\CommentTok{\# Set aside a value for total number of rider}
+\NormalTok{total\_rider }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual}\SpecialCharTok{==}\StringTok{"member"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{sum}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual}\SpecialCharTok{==}\StringTok{"casual"}\NormalTok{)}
+\NormalTok{total\_casual }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual}\SpecialCharTok{==}\StringTok{"casual"}\NormalTok{)}
+\NormalTok{total\_member }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual}\SpecialCharTok{==}\StringTok{"member"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Let's take a look at some of the values. The first anbalysis will be to
+calculate the average and longest time a casual rider rented a bike.
+Afterward, we can use the same code and change the filter to analyze the
+same value but for annual members.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# For better visual and ablity to display values in inline code, we created a table for the summarized data}
+
+\CommentTok{\# Casual riders who use electric bikes}
+\NormalTok{cyclistic }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(rideable\_type }\SpecialCharTok{==} \StringTok{"electric\_bike"} \SpecialCharTok{\&}\NormalTok{ member\_casual }\SpecialCharTok{==} \StringTok{"casual"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+                                                    \FunctionTok{summarize}\NormalTok{(}\AttributeTok{casual\_mean\_time\_min =}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{60}\NormalTok{),}
+                                                              \AttributeTok{casual\_max\_time\_min =}\NormalTok{ (}\FunctionTok{max}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{60}\NormalTok{),}
+                                                              \AttributeTok{casual\_max\_time\_hr =}\NormalTok{ (}\FunctionTok{max}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{3600}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   casual_mean_time_min casual_max_time_min casual_max_time_hr
+##                  <dbl>               <dbl>              <dbl>
+## 1                 10.7                480.               8.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Casual riders who use classic bikes}
+\NormalTok{cyclistic }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(rideable\_type }\SpecialCharTok{==} \StringTok{"classic\_bike"} \SpecialCharTok{\&}\NormalTok{ member\_casual }\SpecialCharTok{==} \StringTok{"casual"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+                                                    \FunctionTok{summarize}\NormalTok{(}\AttributeTok{casual\_mean\_time\_min =}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{60}\NormalTok{),}
+                                                              \AttributeTok{casual\_max\_time\_min =}\NormalTok{ (}\FunctionTok{max}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{60}\NormalTok{),}
+                                                              \AttributeTok{casual\_max\_time\_hr =}\NormalTok{ (}\FunctionTok{max}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{3600}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   casual_mean_time_min casual_max_time_min casual_max_time_hr
+##                  <dbl>               <dbl>              <dbl>
+## 1                 26.0               1560.               26.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Casual riders who use docked bikes}
+\NormalTok{cyclistic }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(rideable\_type }\SpecialCharTok{==} \StringTok{"docked\_bike"} \SpecialCharTok{\&}\NormalTok{ member\_casual }\SpecialCharTok{==} \StringTok{"casual"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+                                                    \FunctionTok{summarize}\NormalTok{(}\AttributeTok{casual\_mean\_time\_min =}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{60}\NormalTok{),}
+                                                              \AttributeTok{casual\_max\_time\_min =}\NormalTok{ (}\FunctionTok{max}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{60}\NormalTok{),}
+                                                              \AttributeTok{casual\_max\_time\_hr =}\NormalTok{ (}\FunctionTok{max}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{3600}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   casual_mean_time_min casual_max_time_min casual_max_time_hr
+##                  <dbl>               <dbl>              <dbl>
+## 1                 132.              16808.               280.
+\end{verbatim}
+
+Below are the results for the casual riders:
+
+\begin{itemize}
+\tightlist
+\item
+  Electric Bike (\textbf{39725} rentals):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Longest Rental Time:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{479} minutes or \textbf{8} hours
+    \end{itemize}
+  \item
+    Average Rental Time:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{10} minutes or \textbf{0} hours
+    \end{itemize}
+  \end{itemize}
+\item
+  Classic Bike (\textbf{19456} rentals):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Longest Rental Time:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{1559} minutes or \textbf{26} hours
+    \end{itemize}
+  \item
+    Average Rental Time:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{26} minutes or \textbf{0} hours
+    \end{itemize}
+  \end{itemize}
+\item
+  Docked Bike (\textbf{3020} rentals):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Longest Rental Time:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{16808} minutes or \textbf{280} hours
+    \end{itemize}
+  \item
+    Average Rental Time:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{132} minutes or \textbf{2} hours
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Annual members who use electric bikes}
+\NormalTok{cyclistic }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(rideable\_type }\SpecialCharTok{==} \StringTok{"electric\_bike"} \SpecialCharTok{\&}\NormalTok{ member\_casual }\SpecialCharTok{==} \StringTok{"member"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+                                                    \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_time\_min =}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{60}\NormalTok{),}
+                                                              \AttributeTok{max\_time\_min =}\NormalTok{ (}\FunctionTok{max}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{60}\NormalTok{),}
+                                                              \AttributeTok{max\_time\_hr =}\NormalTok{ (}\FunctionTok{max}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{3600}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   mean_time_min max_time_min max_time_hr
+##           <dbl>        <dbl>       <dbl>
+## 1          9.43         480.        8.01
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Annual members who use classic bikes}
+\NormalTok{cyclistic }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(rideable\_type }\SpecialCharTok{==} \StringTok{"classic\_bike"} \SpecialCharTok{\&}\NormalTok{ member\_casual }\SpecialCharTok{==} \StringTok{"member"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+                                                    \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_time\_min =}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{60}\NormalTok{),}
+                                                              \AttributeTok{max\_time\_min =}\NormalTok{ (}\FunctionTok{max}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{60}\NormalTok{),}
+                                                              \AttributeTok{max\_time\_hr =}\NormalTok{ (}\FunctionTok{max}\NormalTok{(time\_used)}\SpecialCharTok{/}\DecValTok{3600}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   mean_time_min max_time_min max_time_hr
+##           <dbl>        <dbl>       <dbl>
+## 1          11.7        1560.        26.0
+\end{verbatim}
+
+After the first iteration analysis, the code below was used to find mean
+and max time for docked bikes. However, the results show that there are
+no docked bike used by annual members and the code produces NA and
+errors. The below is the code use to confirm there are no members who
+use docked bikes. To prevent the code from running, it was made into a
+comment
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Annual members who use docked bikes}
+
+\CommentTok{\# cyclistic \%\textgreater{}\% filter(rideable\_type == "docked\_bike" \& member\_casual == "member") \%\textgreater{}\% }
+\CommentTok{\#                                                    summarize(casual\_mean\_time\_min = (mean(time\_used)/60),}
+\CommentTok{\#                                                              casual\_max\_time\_min = (max(time\_used)/60),}
+\CommentTok{\#                                                              casual\_max\_time\_hr = (max(time\_used)/3600))}
+\end{Highlighting}
+\end{Shaded}
+
+Below are the results for an annual member:
+
+\begin{itemize}
+\tightlist
+\item
+  Electric Bike (\textbf{108850} rentals):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Longest Rental Time:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{480} minutes or \textbf{8} hours
+    \end{itemize}
+  \item
+    Average Rental Time:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{9} minutes or \textbf{0} hours
+    \end{itemize}
+  \end{itemize}
+\item
+  Classic Bike (\textbf{87627} rentals):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Longest Rental Time:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{1559} minutes or \textbf{26} hours
+    \end{itemize}
+  \item
+    Average Rental Time:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{11} minutes or \textbf{0} hours
+    \end{itemize}
+  \end{itemize}
+\item
+  Docked Bike:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    NOT USED BY ANNUAL MEMBERS
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{results-and-analysis}{%
+\paragraph{Results and Analysis}\label{results-and-analysis}}
+
+Let's evaluate the difference in uses between casual riders and members
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{casual\_longest\_time }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{max}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{time\_used[cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual }\SpecialCharTok{==} \StringTok{"casual"}\NormalTok{])}\SpecialCharTok{/}\DecValTok{3600}\NormalTok{)}
+\NormalTok{member\_longest\_time }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{max}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{time\_used[cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual }\SpecialCharTok{==} \StringTok{"member"}\NormalTok{])}\SpecialCharTok{/}\DecValTok{3600}\NormalTok{)}
+
+\NormalTok{casual\_avg\_time }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{mean}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{time\_used[cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual }\SpecialCharTok{==} \StringTok{"casual"}\NormalTok{])}\SpecialCharTok{/}\DecValTok{60}\NormalTok{)}
+\NormalTok{member\_avg\_time }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{mean}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{time\_used[cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual }\SpecialCharTok{==} \StringTok{"member"}\NormalTok{])}\SpecialCharTok{/}\DecValTok{60}\NormalTok{)}
+
+\NormalTok{casual\_over\_cavg }\OtherTok{\textless{}{-}}\NormalTok{ cyclistic }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(member\_casual}\SpecialCharTok{==}\StringTok{"casual"} \SpecialCharTok{\&}\NormalTok{ time\_used }\SpecialCharTok{\textgreater{}=}\NormalTok{ (casual\_avg\_time}\SpecialCharTok{*}\DecValTok{60}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(member\_casual)}
+\NormalTok{casual\_over\_mavg }\OtherTok{\textless{}{-}}\NormalTok{ cyclistic }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(member\_casual}\SpecialCharTok{==}\StringTok{"member"} \SpecialCharTok{\&}\NormalTok{ time\_used }\SpecialCharTok{\textgreater{}=}\NormalTok{ (casual\_avg\_time}\SpecialCharTok{*}\DecValTok{60}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(member\_casual)}
+\end{Highlighting}
+\end{Shaded}
+
+Looking at the longest rental time, a casual biker was shown to have
+used the service \textbf{11.2} times longer than an annual member. The
+average casual rider use the bikes \textbf{2.1} times more than members.
+
+There are a total of \textbf{258678} riders who use the service and
+\textbf{24} are casual riders.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{16.4\%} of casual riders rents longer than the average casual
+  rider
+\item
+  \textbf{28.1\%} of casual riders rent longer than the average member
+\end{itemize}
+
+\hypertarget{visuals}{%
+\subsection{Visuals}\label{visuals}}
+
+\hypertarget{casual-riders}{%
+\subsubsection{Casual Riders}\label{casual-riders}}
+
+As a presentation to stakeholder, we will present a donut chart of which
+bikes are used by casuals and members.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{casual\_ebike }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{sum}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{rideable\_type }\SpecialCharTok{==} \StringTok{"electric\_bike"} \SpecialCharTok{\&}\NormalTok{ cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual }\SpecialCharTok{==} \StringTok{"casual"}\NormalTok{)}\SpecialCharTok{/}\NormalTok{total\_casual}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{casual\_cbike }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{sum}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{rideable\_type }\SpecialCharTok{==} \StringTok{"classic\_bike"} \SpecialCharTok{\&}\NormalTok{ cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual }\SpecialCharTok{==} \StringTok{"casual"}\NormalTok{)}\SpecialCharTok{/}\NormalTok{total\_casual}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{casual\_dbike }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{sum}\NormalTok{(cyclistic}\SpecialCharTok{$}\NormalTok{rideable\_type }\SpecialCharTok{==} \StringTok{"docked\_bike"} \SpecialCharTok{\&}\NormalTok{ cyclistic}\SpecialCharTok{$}\NormalTok{member\_casual }\SpecialCharTok{==} \StringTok{"casual"}\NormalTok{)}\SpecialCharTok{/}\NormalTok{total\_casual}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# Donut Chart}
+\NormalTok{slices }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(casual\_ebike, casual\_cbike, casual\_dbike)}
+\NormalTok{lbls }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Electric Bikes"}\NormalTok{,}\StringTok{"Classic Bikes"}\NormalTok{, }\StringTok{"Docked bikes"}\NormalTok{)}
+\NormalTok{slice\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(lbls, slices)}
+\FunctionTok{PieChart}\NormalTok{(lbls,slices, }\AttributeTok{main =} \StringTok{"Percent of Bikes Used by Casual Riders"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## >>> Note: lbls is not in a data frame (table)
+## >>> Note: lbls is not in a data frame (table)
+## >>> Note: slices is not in a data frame (table)
+\end{verbatim}
+
+\includegraphics{cyclistic_analysis_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{verbatim}
+## >>> suggestions
+## PieChart(lbls, hole=0)  # traditional pie chart
+## PieChart(lbls, values="%")  # display %'s on the chart
+## PieChart(lbls)  # bar chart
+## Plot(lbls)  # bubble plot
+## Plot(lbls, values="count")  # lollipop plot 
+## 
+## --- slices --- 
+##  
+##     n   miss       mean         sd        min        mdn        max 
+##      3      0     33.337     29.559      4.860     31.280     63.870
+\end{verbatim}
+
+Add a new chunk by clicking the \emph{Insert Chunk} button on the
+toolbar or by pressing \emph{Cmd+Option+I}.
+
+When you save the notebook, an HTML file containing the code and output
+will be saved alongside it (click the \emph{Preview} button or press
+\emph{Cmd+Shift+K} to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the
+editor. Consequently, unlike \emph{Knit}, \emph{Preview} does not run
+any R code chunks. Instead, the output of the chunk when it was last run
+in the editor is displayed.
+
+\end{document}

@@ -1,0 +1,318 @@
+---
+title: 'Customer Analysis of Cyclistic:'
+subtitle: "A Bike-Sharing Company"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+### PROJECT OVERVIEW
+
+This is the analysis performed on Cyclistic's bike sharing data. The purpose of this analysis is for Cyclistic to provide casual and annual members with the best cost saving solution. Cyclistic believe that some casual members can benefit from becoming annual members.
+
+### OBJECTIVES:
+
+-   Encourage casual riders to become annual members
+-   Increase the number of new annual members
+
+### DELIVERABLES:
+
+1.  Description of Data Source used
+2.  Documentation of all cleaning or manipulation of data
+3.  A summary of analysis
+4.  Supporting visualization and key findings
+5.  Top three (3) recommendations based on findings
+
+### METHOD
+
+Utilizing the data processing method of ask, prepare, process, analyze, share, and act to complete the objective and provide a solution for the client.
+
+#### ASK
+
+For the first step in the data analysis process, we have to start by asking the right questions.
+
+-   How do the annual members and casual riders use Cyclistic differently?
+    -   How often do casual members use the service versus annual members
+    -   What data do we need to consider and what are extra
+    -   What is the average time used for each user type
+    -   What is the max time used for each user and bike type
+    -   What is the standard deviation of the time used for each user and bike type
+
+#### PREPARE
+
+For this process, the data will need to be downloaded and review on what information is given. From here, we can determine what processing steps to take based on the data provided.
+
+-   What information can be used?
+-   Are there any inconsistencies or missing values?
+-   What information need to be extrapolated?
+-   Install and load the correct packages
+
+```{r}
+suppressPackageStartupMessages({
+pacman::p_load(ggplot2, tidyr, dplyr, tidyverse, lessR, janitor, here, dslabs)
+})
+```
+
+#### PROCESS
+
+The process of cleaning and organizing the data will be detailed in this notebook. The codes and results will be shown as each point is addressed.
+
+#### ANALYZE
+
+The analyze will be detailed in this notebook. As the questions in the ask section, the detailed analysis will answer each and will reach a conclusion. At the end of the analysis, the data will reveal what differentiate annual members from the casual riders.
+
+#### SHARE
+
+In conculusion, visualation will be presented to the stakeholders in this notebook. A minimum of three (3) solutions wil be provided to the stakeholders to select and act
+
+### PROCESS AND ANALYZE
+
+#### Loading the dataset
+
+R Studio will be used and we will call this dataset "cyclistic". After loading the dataset we want to view the data and explore the structure.
+
+```{r Loading Data, results='hide'}
+library(readr)
+cyclistic <- read_csv("Desktop/Case Study 1/202303-cyclistic.csv")
+```
+
+```{r}
+# This will show the structure of the dataset
+str(cyclistic)
+```
+
+Noting the results from the dataset. There are 13 columns and 3 identifier columns. The identify columns are the ride_id, rideable_type, and member_casual.
+
+-   ride_id is the individual rental transaction.
+    -   Initially, there was a question of whether this is the individual bike ID or rider id. It was determined that this was the transaction ID since there are no distinct values (see "null check").
+-   rideable_type is the type of bike it is
+-   member_casual is the whether or not the rider is a member or casual rider
+
+#### Reviewing the data
+
+From the dataset, we need to determine if there are any missing values, how many distinct values, and what they are. The code below will show a count of which columns have NULL values and how many.
+
+```{r Null Check, message=FALSE, warning=FALSE, paged.print=FALSE}
+# Null check code
+null_check <- c(1:ncol(cyclistic))
+  for(i in 1:ncol(cyclistic)){
+    null_check[i] <- sum(is.na(cyclistic[,i]))}
+null_check <- data.frame(colnames(cyclistic), null_check)
+
+```
+
+```{r}
+# Execute to display the number NULL values for each attribute
+null_check
+```
+
+Next, the code below will determine what the distinct values are and how many of each.
+
+```{r}
+# Distinct Check
+num_distinct <- c(1:ncol(cyclistic))
+  for(i in 1:ncol(cyclistic) ){
+    num_distinct[i] <- as.integer(count(distinct(cyclistic[i])))}
+num_distinct <- data.frame(colnames(cyclistic), num_distinct)
+
+```
+
+```{r}
+# Run this to display the number of distinct values for each attribute
+num_distinct
+```
+
+##### Number of users
+
+```{r echo=FALSE}
+casual_riders <- as.integer(sum(cyclistic$member_casual=="casual"))
+annual_members <- as.integer(sum(cyclistic$member_casual=="member"))
+total_riders <- casual_riders+annual_members
+```
+
+-   Total Riders
+    -   `r round(total_riders, digits = 3)` total riders
+-   Number of Casual Riders
+    -   `r round(casual_riders, digits = 3)` casual riders
+    -   `r round(casual_riders / total_riders, digits = 3)*100`% of total riders
+-   Number of Annual Members
+    -   `r round(annual_members, digits = 3)` casual riders
+    -   `r round(annual_members / total_riders, digits = 3)*100`% of total
+
+#### Organize the dataset
+
+After the initial review of the dataset, the primary focus was determined to be ride_id, rideable_type, started_at, ended_at, and member_casual. Additional information was need and will utilize the existing attributes to extrapolate the time rented by each rider type and bike type.
+
+To extrapolate the time rented, we need to take the date and time difference from ended_at and started_at.
+
+```{r}
+cyclistic <- cyclistic %>% mutate(time_used=as.numeric(difftime(cyclistic$ended_at, cyclistic$started_at, units = "secs")))
+
+```
+
+Let's take a look at some of the values. The first analysis will be to calculate the average and longest time a casual rider rented a bike. Afterward, we can use the same code and change the filter to analyze the same value but for annual members.
+
+```{r}
+# For better visual and ablity to display values in inline code, we created a table for the summarized data
+
+# Casual riders who use electric bikes
+cyclistic %>% filter(rideable_type == "electric_bike" & member_casual == "casual") %>%
+                                                    summarize(casual_mean_time_min = (mean(time_used)/60),
+                                                              casual_max_time_min = (max(time_used)/60),
+                                                              casual_max_time_hr = (max(time_used)/3600))
+# Casual riders who use classic bikes
+cyclistic %>% filter(rideable_type == "classic_bike" & member_casual == "casual") %>% 
+                                                    summarize(casual_mean_time_min = (mean(time_used)/60),
+                                                              casual_max_time_min = (max(time_used)/60),
+                                                              casual_max_time_hr = (max(time_used)/3600))
+# Casual riders who use docked bikes
+cyclistic %>% filter(rideable_type == "docked_bike" & member_casual == "casual") %>% 
+                                                    summarize(casual_mean_time_min = (mean(time_used)/60),
+                                                              casual_max_time_min = (max(time_used)/60),
+                                                              casual_max_time_hr = (max(time_used)/3600))
+
+```
+
+Below are the results for the casual riders:
+
+-   Electric Bike (**`r sum(cyclistic$rideable_type == "electric_bike" & cyclistic$member_casual == "casual")`** rentals):
+    -   Longest Rental Time:
+        -   **`r as.integer(max(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "electric_bike"])/60)`** minutes or **`r round(max(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "electric_bike"])/3600)`** hours
+    -   Average Rental Time:
+        -   **`r as.integer(mean(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "electric_bike"])/60)`** minutes or **`r round(mean(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "electric_bike"])/3600)`** hours
+-   Classic Bike (**`r sum(cyclistic$rideable_type == "classic_bike" & cyclistic$member_casual == "casual")`** rentals):
+    -   Longest Rental Time:
+        -   **`r as.integer(max(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "classic_bike"])/60)`** minutes or **`r round(max(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "classic_bike"])/3600)`** hours
+    -   Average Rental Time:
+        -   **`r as.integer(mean(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "classic_bike"])/60)`** minutes or **`r round(mean(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "classic_bike"])/3600)`** hours
+-   Docked Bike (**`r sum(cyclistic$rideable_type == "docked_bike" & cyclistic$member_casual == "casual")`** rentals):
+    -   Longest Rental Time:
+        -   **`r as.integer(max(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "docked_bike"])/60)`** minutes or **`r round(max(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "docked_bike"])/3600)`** hours
+    -   Average Rental Time:
+        -   **`r as.integer(mean(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "docked_bike"])/60)`** minutes or **`r round(mean(cyclistic$time_used[cyclistic$member_casual == "casual" & cyclistic$rideable_type == "docked_bike"])/3600)`** hours
+
+```{r}
+# Annual members who use electric bikes
+cyclistic %>% filter(rideable_type == "electric_bike" & member_casual == "member") %>%
+                                                    summarize(mean_time_min = (mean(time_used)/60),
+                                                              max_time_min = (max(time_used)/60),
+                                                              max_time_hr = (max(time_used)/3600))
+# Annual members who use classic bikes
+cyclistic %>% filter(rideable_type == "classic_bike" & member_casual == "member") %>% 
+                                                    summarize(mean_time_min = (mean(time_used)/60),
+                                                              max_time_min = (max(time_used)/60),
+                                                              max_time_hr = (max(time_used)/3600))
+```
+
+After the first iteration analysis, the code below was used to find mean and max time for docked bikes. However, the results show that there are no docked bike used by annual members and the code produces NA and errors. The below is the code use to confirm there are no members who use docked bikes. To prevent the code from running, it was made into a comment
+
+```{r eval=FALSE, include=FALSE}
+# Annual members who use docked bikes
+
+# cyclistic %>% filter(rideable_type == "docked_bike" & member_casual == "member") %>% 
+#                                                    summarize(casual_mean_time_min = (mean(time_used)/60),
+#                                                              casual_max_time_min = (max(time_used)/60),
+#                                                              casual_max_time_hr = (max(time_used)/3600))
+```
+
+Below are the results for an annual member:
+
+-   Electric Bike (**`r sum(cyclistic$rideable_type == "electric_bike" & cyclistic$member_casual == "member")`** rentals):
+    -   Longest Rental Time:
+        -   **`r as.integer(max(cyclistic$time_used[cyclistic$member_casual == "member" & cyclistic$rideable_type == "electric_bike"])/60)`** minutes or **`r round(max(cyclistic$time_used[cyclistic$member_casual == "member" & cyclistic$rideable_type == "electric_bike"])/3600)`** hours
+    -   Average Rental Time:
+        -   **`r as.integer(mean(cyclistic$time_used[cyclistic$member_casual == "member" & cyclistic$rideable_type == "electric_bike"])/60)`** minutes or **`r round(mean(cyclistic$time_used[cyclistic$member_casual == "member" & cyclistic$rideable_type == "electric_bike"])/3600)`** hours
+-   Classic Bike (**`r sum(cyclistic$rideable_type == "classic_bike" & cyclistic$member_casual == "member")`** rentals):
+    -   Longest Rental Time:
+        -   **`r as.integer(max(cyclistic$time_used[cyclistic$member_casual == "member" & cyclistic$rideable_type == "classic_bike"])/60)`** minutes or **`r round(max(cyclistic$time_used[cyclistic$member_casual == "member" & cyclistic$rideable_type == "classic_bike"])/3600)`** hours
+    -   Average Rental Time:
+        -   **`r as.integer(mean(cyclistic$time_used[cyclistic$member_casual == "member" & cyclistic$rideable_type == "classic_bike"])/60)`** minutes or **`r round(mean(cyclistic$time_used[cyclistic$member_casual == "member" & cyclistic$rideable_type == "classic_bike"])/3600)`** hours
+-   Docked Bike:
+    -   NOT USED BY ANNUAL MEMBERS
+
+#### Results and Analysis
+
+Let's evaluate the difference in uses between casual riders and members
+
+```{r include=FALSE}
+casual_longest_time <- as.integer(max(cyclistic$time_used[cyclistic$member_casual == "casual"]))
+member_longest_time <- as.integer(max(cyclistic$time_used[cyclistic$member_casual == "member"]))
+
+casual_avg_time <- as.integer(mean(cyclistic$time_used[cyclistic$member_casual == "casual"]))
+member_avg_time <- as.integer(mean(cyclistic$time_used[cyclistic$member_casual == "member"]))
+
+casual_over_cavg <- cyclistic %>% filter(member_casual=="casual" & time_used >= (casual_avg_time)) %>% count(member_casual)
+casual_over_mavg <- cyclistic %>% filter(member_casual=="member" & time_used >= (casual_avg_time)) %>% count(member_casual)
+```
+
+Looking at the longest rental time, a casual biker was shown to have used the service **`r round(casual_longest_time/member_longest_time, digits = 1)`** times longer than an annual member. The average time a casual rider uses bikes is **`r round(casual_avg_time/member_avg_time, digits = 1)`** times more than the average members.
+
+There are a total of **`r total_riders`** riders who use the service and **`r round(sum(cyclistic$member_casual=="casual")/total_riders*100, digits = 0)`%** are casual riders.
+
+-   **`r round(as.numeric(casual_over_cavg[2] / casual_riders), digits=3) *100`%** of casual riders rents longer than the average casual rider
+-   **`r round(as.numeric(casual_over_mavg[2] / casual_riders), digits=3) *100`%** of casual riders rent longer than the average member
+
+## Visuals
+
+As a presentation to stakeholder, we will present a donut chart of which bikes are used by casuals and members.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+casual_ebike <- round(sum(cyclistic$rideable_type == "electric_bike" & cyclistic$member_casual == "casual")/casual_riders*100, digits = 2)
+casual_cbike <- round(sum(cyclistic$rideable_type == "classic_bike" & cyclistic$member_casual == "casual")/casual_riders*100, digits = 2)
+casual_dbike <- round(sum(cyclistic$rideable_type == "docked_bike" & cyclistic$member_casual == "casual")/casual_riders*100, digits = 2)
+
+# Donut Chart
+slices <- c(casual_ebike, casual_cbike, casual_dbike)
+lbls <- c("Electric Bikes","Classic Bikes", "Docked bikes")
+
+pie(slices, labels = slices,
+    main = "Casual Rider Bike Rentals by Type", col = rainbow(length(slices)))
+legend("topright", c(lbls),
+                    cex = 0.5, fill = rainbow(length(slices)))
+```
+
+As for the annual members, only 2 out of 3 bikes were used and the value was stated previously.
+
+To fully visual the difference in useage between the casuals and members, a stacked bar graph would show a percentage comparison using member average time as a reference point.
+
+Values needed: - num of members that is below and above avg - Turn the number into a percentage of total members - Need to divide into 3 sections (below avg, above avg, and max)
+
+-   num of casuals that is below and above member avg
+
+    -   Turn the number into a percentage of total casusal
+    -   Need to divide into 3 sections (below avg, above avg, and max)
+
+    ```{r}
+    # Casual over avg
+    casual_over_cavg <- cyclistic %>% filter(member_casual=="casual" & time_used >= (member_avg_time)) %>% count(member_casual)
+
+    # Casual under avg
+    casual_under_cavg <- cyclistic %>% filter(member_casual=="casual" & time_used < (member_avg_time)) %>% count(member_casual)
+
+    # Member over avg
+    member_over_avg <- cyclistic %>% filter(member_casual=="member" & time_used >= (member_avg_time)) %>% count(member_casual)
+
+    # Member under avg
+    member_under_avg <- cyclistic %>% filter(member_casual=="member" & time_used < (member_avg_time)) %>% count(member_casual)
+
+    values <- rbind(member_under_avg, member_over_avg, casual_under_cavg, casual_over_cavg)
+
+    values <- mutate(values, over_under = c("Under Average", "Over Average", "Under Average", "Over Average"))
+
+
+
+    # Give the chart file a name
+    # png(file = "barchart_stacked.png")
+
+    # Create the bar chart
+    ggplot(values, aes(x = member_casual, y = n, fill = over_under)) + 
+      geom_bar(position='fill', stat = "identity")
+    # Add the legend to the chart
+    ```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
